@@ -1,0 +1,47 @@
+#include <iostream>
+#include <ctype.h>
+using namespace std;
+
+string returnTime(string s)
+{
+    string res_s;
+    int length = s.size();
+
+    if (s[length - 2] == 'P')
+    {
+        if (s[0] == '1' && s[1] == '2')
+        {
+            s[0] = '0';
+            s[1] = '0';
+        }
+        else
+        {
+            string hour_str = s.substr(0, 2);
+            // cout << hour_str << endl;
+            int hour = stoi(hour_str);
+            // cout << hour << endl;
+            hour += 12;
+            // cout << hour;
+            string h_res = to_string(hour);
+
+            res_s = h_res + s.substr(2, 6);
+        }
+    }
+    else if (s[length - 2] == 'A')
+    {
+        res_s = s.substr(0, length - 2);
+    }
+    return res_s;
+}
+
+int main()
+{
+    string before;
+    cin >> before;
+
+    string res = returnTime(before);
+
+    cout << res;
+
+    return 0;
+}
